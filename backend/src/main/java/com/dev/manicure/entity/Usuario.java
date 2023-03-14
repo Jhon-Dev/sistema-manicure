@@ -1,8 +1,8 @@
 package com.dev.manicure.entity;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "TB_USUARIO")
@@ -10,11 +10,11 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     @Column(name = "NOME", nullable = false, length = 100)
-    private String nome;
+    private String userName;
     @Column(name = "SENHA", nullable = false, length = 100)
-    private String senha;
+    private String password;
 
     @Column(name = "EMAIL", nullable = false, length = 100, unique = true)
     private String email;
@@ -22,11 +22,15 @@ public class Usuario {
     @Column(name = "TELEFONE", length = 12)
     private Integer telefone;
 
+    @Column(name = "NASCIMENTO", nullable = false, length = 20)
+    private Date nascimento;
+
     @Column(name = "PACOTE_MENSAL", length = 5)
     private Boolean pacoteMensal;
 
-    @Column(name = "NASCIMENTO", nullable = false, length = 20)
-    private Date nascimento;
+    @Column(name = "CD_ROLES", nullable = false)
+    @ManyToMany
+    private List<Role> roles;
 
     public Usuario() {
     }
@@ -40,19 +44,19 @@ public class Usuario {
     }
 
     public String getNome() {
-        return nome;
+        return userName;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.userName = nome;
     }
 
     public String getSenha() {
-        return senha;
+        return password;
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+        this.password = senha;
     }
 
     public String getEmail() {
@@ -71,13 +75,27 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-
-
     public Date getNascimento() {
         return nascimento;
     }
 
     public void setNascimento(Date nascimento) {
         this.nascimento = nascimento;
+    }
+
+    public Boolean getPacoteMensal() {
+        return pacoteMensal;
+    }
+
+    public void setPacoteMensal(Boolean pacoteMensal) {
+        this.pacoteMensal = pacoteMensal;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

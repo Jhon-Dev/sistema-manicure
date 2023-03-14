@@ -6,6 +6,7 @@ import com.dev.manicure.repository.UsuarioRepository;
 import com.dev.manicure.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -20,6 +21,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = "/usuarios")
     public List<Usuario> listarUsuarios() {
         return usuarioService.listarUsuarios();
@@ -31,15 +33,9 @@ public class UsuarioController {
         return ResponseEntity.created(URI.create("/usuario" + usuario.getId())).body(usuario);
     }
 
-    @PutMapping(value = "/usuario/{id}")
-    public ResponseEntity<Usuario>  atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuarioHolder) {
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado!!"));
-        usuario.setNome(usuarioHolder.getNome());
-        usuario.setSenha(usuarioHolder.getSenha());
-        usuario.setNascimento(usuarioHolder.getNascimento());
-        usuario.setTelefone(usuarioHolder.getTelefone());
-        usuario.setEmail(usuarioHolder.getEmail());
-        usuarioService.atualizarUsuario(usuario);
+    @PutMapping(value = "/usuario/{uuid}")
+    public ResponseEntity<Usuario>  atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
+        usuario = usuarioService.atualizarUsuario(id,usuario);
         return ResponseEntity.created(URI.create("/usuario" + usuario.getId())).body(usuario);
     }
 
