@@ -22,7 +22,7 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping(value = "/usuarios")
+    @GetMapping(value = "/usuario/lista")
     public List<Usuario> listarUsuarios() {
         return usuarioService.listarUsuarios();
     }
@@ -33,7 +33,7 @@ public class UsuarioController {
         return ResponseEntity.created(URI.create("/usuario" + usuario.getId())).body(usuario);
     }
 
-    @PutMapping(value = "/usuario/{uuid}")
+    @PutMapping(value = "/usuario/{id}")
     public ResponseEntity<Usuario>  atualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
         usuario = usuarioService.atualizarUsuario(id,usuario);
         return ResponseEntity.created(URI.create("/usuario" + usuario.getId())).body(usuario);
