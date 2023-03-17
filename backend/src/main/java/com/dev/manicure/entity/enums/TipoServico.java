@@ -1,5 +1,8 @@
 package com.dev.manicure.entity.enums;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum TipoServico {
 
     MAO("Mão"),
@@ -16,5 +19,8 @@ public enum TipoServico {
 
     public String getDescricao() {
         return descricao;
+    }
+    public static List<TipoServico> asList() {
+        return Arrays.asList(TipoServico.values());
     }
 }

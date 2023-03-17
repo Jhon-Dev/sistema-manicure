@@ -28,7 +28,10 @@ public class Usuario {
     @Column(name = "PACOTE_MENSAL", length = 5)
     private Boolean pacoteMensal;
 
-    @Column(name = "CD_ROLES", nullable = false)
+    @OneToMany(mappedBy = "usuario")
+    private List<ServicoPrestado> servicosPrestados;
+
+    @Column(name = "CD_ROLES")
     @ManyToMany
     private List<Role> roles;
 
