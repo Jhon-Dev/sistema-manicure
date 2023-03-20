@@ -1,6 +1,6 @@
 package com.dev.manicure.auth;
 
-import com.dev.manicure.auth.token.TokenRepository;
+import com.dev.manicure.repository.TokenRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

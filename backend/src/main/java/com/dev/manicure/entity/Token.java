@@ -1,4 +1,4 @@
-package com.dev.manicure.auth.token;
+package com.dev.manicure.entity;
 
 import com.dev.manicure.entity.User;
 import com.dev.manicure.entity.enums.TokenType;

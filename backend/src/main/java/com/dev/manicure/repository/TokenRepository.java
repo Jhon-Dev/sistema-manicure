@@ -1,5 +1,6 @@
-package com.dev.manicure.auth.token;
+package com.dev.manicure.repository;
 
+import com.dev.manicure.entity.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
