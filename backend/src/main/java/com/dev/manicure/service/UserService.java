@@ -2,15 +2,11 @@ package com.dev.manicure.service;
 
 import com.dev.manicure.auth.JwtService;
 import com.dev.manicure.auth.AuthenticationResponse;
-import com.dev.manicure.entity.Token;
 import com.dev.manicure.entity.User;
 import com.dev.manicure.entity.enums.Role;
-import com.dev.manicure.entity.enums.TokenType;
-import com.dev.manicure.repository.TokenRepository;
 import com.dev.manicure.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,8 +29,6 @@ public class UserService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
-    TokenRepository tokenRepository;
 
 
     public AuthenticationResponse register(User userHolder) {
@@ -55,7 +49,6 @@ public class UserService {
                     .build();
             var saveUser = userRepository.save(user);
             var token = jwtService.generateToken(user);
-            saveUserToken(user,token);
 
             return AuthenticationResponse.builder().token(token).build();
         }
@@ -70,8 +63,7 @@ public class UserService {
         );
         var user = userRepository.findByEmail(userHolder.getEmail()).orElseThrow();
         var token = jwtService.generateToken(user);
-        revokeAllUserTokens(user);
-        saveUserToken(user,token);
+
         return AuthenticationResponse.builder().token(token).build();
     }
 
@@ -95,25 +87,4 @@ public class UserService {
         return ResponseEntity.ok().build();
     }
 
-    private void saveUserToken(User user, String jwtToken) {
-        var token = Token.builder()
-                .user(user)
-                .token(jwtToken)
-                .tokenType(TokenType.BEARER)
-                .expired(false)
-                .revoked(false)
-                .build();
-        tokenRepository.save(token);
-    }
-
-    private void revokeAllUserTokens(User user) {
-        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
-        if (validUserTokens.isEmpty())
-            return;
-        validUserTokens.forEach(token -> {
-            token.setExpired(true);
-            token.setRevoked(true);
-        });
-        tokenRepository.saveAll(validUserTokens);
-    }
 }
