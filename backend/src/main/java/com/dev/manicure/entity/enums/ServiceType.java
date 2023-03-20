@@ -3,7 +3,7 @@ package com.dev.manicure.entity.enums;
 import java.util.Arrays;
 import java.util.List;
 
-public enum TipoServico {
+public enum ServiceType {
 
     MAO("Mão"),
     PE("Pé"),
@@ -13,14 +13,14 @@ public enum TipoServico {
 
     private final String descricao;
 
-    private TipoServico(String descricao) {
+    private ServiceType(String descricao) {
         this.descricao = descricao;
     }
 
     public String getDescricao() {
         return descricao;
     }
-    public static List<TipoServico> asList() {
-        return Arrays.asList(TipoServico.values());
+    public static List<ServiceType> asList() {
+        return Arrays.asList(ServiceType.values());
     }
 }
