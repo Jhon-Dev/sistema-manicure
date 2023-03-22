@@ -46,6 +46,7 @@ public class User implements UserDetails {
     @Column(name = "PACKAGE_MONTHLY", length = 5)
     private Boolean packageMonthly;
 
+
     @OneToMany(mappedBy = "user")
     private List<ServiceProvied> serviceProvieds;
 

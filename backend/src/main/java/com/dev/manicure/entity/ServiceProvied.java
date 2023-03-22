@@ -32,8 +32,8 @@ public class ServiceProvied {
     @Column(name = "VALUE")
     private Integer valor;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "user_id")
     private User user;
 
 }
