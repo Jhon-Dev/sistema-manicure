@@ -50,7 +50,6 @@ public class UserController {
 
     @DeleteMapping(value = "/user/delete/{id}")
     public ResponseEntity<User> deleteUser(@PathVariable(value = "id") Long id){
-        userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
         return userService.deleteUser(id);
     }
 }

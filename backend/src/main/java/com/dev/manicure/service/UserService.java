@@ -83,6 +83,7 @@ public class UserService {
     }
 
     public ResponseEntity<User> deleteUser (Long id){
+        userRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
         userRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
