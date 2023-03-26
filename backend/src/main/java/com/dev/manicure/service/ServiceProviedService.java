@@ -1,7 +1,6 @@
 package com.dev.manicure.service;
 
 import com.dev.manicure.entity.ServiceProvied;
-import com.dev.manicure.entity.User;
 import com.dev.manicure.repository.ServiceProviedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

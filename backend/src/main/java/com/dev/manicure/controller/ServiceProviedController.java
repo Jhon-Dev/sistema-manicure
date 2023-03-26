@@ -1,7 +1,6 @@
 package com.dev.manicure.controller;
 
 import com.dev.manicure.entity.ServiceProvied;
-import com.dev.manicure.entity.User;
 import com.dev.manicure.service.ServiceProviedService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
