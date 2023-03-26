@@ -27,4 +27,10 @@ public class ServiceProviedController {
     public List<ServiceProvied> serviceProviedList() {
         return serviceProviedService.serviceProviedList();
     }
+
+    @GetMapping(value = "/serviceprovied/findByUserId/{id}")
+    public ResponseEntity<List<ServiceProvied>> getByUserId(@PathVariable(value = "id") Long id) {
+        List<ServiceProvied> serviceProviedList = serviceProviedService.findByUserId(id);
+        return ResponseEntity.ok(serviceProviedList);
+    }
 }

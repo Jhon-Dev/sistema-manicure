@@ -25,7 +25,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column(name = "FIRSTNAME", nullable = false, length = 100)
     private String firstname;
 
@@ -45,10 +45,6 @@ public class User implements UserDetails {
 
     @Column(name = "PACKAGE_MONTHLY", length = 5)
     private Boolean packageMonthly;
-
-
-    @OneToMany(mappedBy = "user")
-    private List<ServiceProvied> serviceProvieds;
 
     @Column(name = "ROLE")
     @Enumerated(EnumType.STRING)

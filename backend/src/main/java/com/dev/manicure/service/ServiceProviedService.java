@@ -14,10 +14,13 @@ public class ServiceProviedService {
     @Autowired
     ServiceProviedRepository serviceProviedRepository;
 
-    @ExceptionHandler
     public List<ServiceProvied> serviceProviedList() {
         List<ServiceProvied> serviceProvieds = serviceProviedRepository.findAll();
         return serviceProvieds;
+    }
+
+    public List<ServiceProvied> findByUserId(Long id) {
+        return serviceProviedRepository.findByServiceProviedUser(id);
     }
 
     public ServiceProvied register(ServiceProvied serviceProvied) {
