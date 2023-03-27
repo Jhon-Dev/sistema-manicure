@@ -2,7 +2,6 @@ package com.dev.manicure.controller;
 
 import com.dev.manicure.auth.AuthenticationResponse;
 import com.dev.manicure.entity.User;
-import com.dev.manicure.repository.UserRepository;
 import com.dev.manicure.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private UserRepository userRepository;
 
 
     @PostMapping("/auth/register")
