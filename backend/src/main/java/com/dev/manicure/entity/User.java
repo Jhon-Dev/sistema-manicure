@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,11 +38,14 @@ public class User implements UserDetails {
     @Column(name = "EMAIL", nullable = false, length = 100, unique = true)
     private String email;
 
-    @Column(name = "PHONE", length = 12)
-    private Integer phone;
+    @Column(name = "PHONE", length = 20)
+    private String  phone;
 
     @Column(name = "BIRTH", nullable = false, length = 20)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date birth;
+
+    private String formattedBirthDate;
 
     @Column(name = "PACKAGE_MONTHLY", length = 5)
     private Boolean packageMonthly;

@@ -13,6 +13,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,10 +45,10 @@ public class UserService {
             var user = User.builder()
                     .firstname(userHolder.getUsername())
                     .lastName(userHolder.getLastName())
+                    .birth(userHolder.getBirth())
                     .password(passwordEncoder.encode(userHolder.getPassword()))
                     .email(userHolder.getEmail())
                     .phone(userHolder.getPhone())
-                    .birth(userHolder.getBirth())
                     .packageMonthly(userHolder.getPackageMonthly())
                     .role(Role.USER)
                     .build();
@@ -68,8 +73,14 @@ public class UserService {
     }
 
     public List<User> userList() {
-        List<User> user = userRepository.findAll();
-        return user;
+        List<User> users = userRepository.findAll();
+        for (User user : users) {
+            Date birthDate = user.getBirth();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            String formattedBirthDate = formatter.format(birthDate);
+            user.setFormattedBirthDate(formattedBirthDate);
+        }
+        return users;
     }
 
     public User updateUser(Long id, User userHolder) {
