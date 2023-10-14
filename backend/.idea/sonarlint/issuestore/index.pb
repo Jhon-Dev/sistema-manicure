@@ -19,3 +19,13 @@ w
 Gsrc/main/java/com/dev/manicure/controller/ServiceProviedController.java,0\5\059ef43ca2f19048a5cd995ed719d164754daab0
 q
 Asrc/main/java/com/dev/manicure/service/ServiceProviedService.java,3\8\383624c0a3991d8107e767cbea88f0f93b293ed1
+g
+7src/main/java/com/dev/manicure/service/UserService.java,d\a\da8259475829d0c746215c75289a8a454826c7ed
+_
+/src/main/java/com/dev/manicure/entity/User.java,7\9\799f7439c0e26ea5062fe7e9c84cc34162d5b0da
+m
+=src/main/java/com/dev/manicure/controller/UserController.java,6\3\63da02679f0e3d0118f352c9b1d18f70035bd3bd
+p
+@src/main/java/com/dev/manicure/auth/JwtAuthenticationFilter.java,c\0\c01f50bebd7328fe3470f2a80f1f022779f68ec1
+k
+;src/main/java/com/dev/manicure/config/AplicationConfig.java,9\d\9d8dcc3e6a1a11241447d4d9eb35a76218c80028

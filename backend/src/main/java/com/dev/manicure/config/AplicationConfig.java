@@ -1,6 +1,7 @@
 package com.dev.manicure.config;
 
 import com.dev.manicure.repository.UserRepository;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Configuration
 @RequiredArgsConstructor
 public class AplicationConfig {
@@ -24,7 +27,6 @@ public class AplicationConfig {
     public UserDetailsService userDetailsService(){
         return email -> userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado!"));
-
     }
 
     @Bean

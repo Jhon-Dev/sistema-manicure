@@ -1,11 +1,13 @@
 package com.dev.manicure.service;
 
-import com.dev.manicure.auth.JwtService;
 import com.dev.manicure.auth.AuthenticationResponse;
+import com.dev.manicure.auth.JwtService;
 import com.dev.manicure.entity.User;
 import com.dev.manicure.entity.enums.Role;
 import com.dev.manicure.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,9 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -72,8 +71,8 @@ public class UserService {
         return AuthenticationResponse.builder().token(token).build();
     }
 
-    public List<User> userList() {
-        List<User> users = userRepository.findAll();
+    public Page<User> userList(Pageable pageable) {
+        Page<User> users = userRepository.findAll(pageable);
         for (User user : users) {
             Date birthDate = user.getBirth();
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

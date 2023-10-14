@@ -1,5 +1,6 @@
 package com.dev.manicure.auth;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,7 +38,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         jwt = authHeader.substring(7);
-        email = jwtService.extractUsername(jwt);
+
+        try {
+            email = jwtService.extractUsername(jwt);
+        } catch (ExpiredJwtException e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Token expired");
+            return;
+        }
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
             if (jwtService.isTokenValid(jwt, userDetails)) {

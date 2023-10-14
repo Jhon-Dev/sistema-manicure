@@ -5,12 +5,14 @@ import com.dev.manicure.entity.User;
 import com.dev.manicure.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api")
 @RequiredArgsConstructor
@@ -34,8 +36,8 @@ public class UserController {
     }
 
     @GetMapping(value = "/user/list")
-    public List<User> userList() {
-        return userService.userList();
+    public Page<User> userList(Pageable pageable) {
+        return userService.userList(pageable);
     }
 
     @PutMapping(value = "/user/{id}")
